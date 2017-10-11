@@ -168,15 +168,15 @@ def blogs():
     id = request.args.get('id')
     username = request.args.get('user')
 
-    if id:
-        blog = Blog.query.get(id)
-        return render_template('blogs.html', title='Blogz', blog=blog, current_user=getUser(), isLoggedIn=isLoggedIn())
-
     if username:
         blogs = User.query.filter_by(username=username).first().blogs
         return render_template('singleUser.html', title='Blogz', blogs=blogs, username=username, postnew=request.method == 'POST', current_user=getUser(), isLoggedIn=isLoggedIn())
 
     blogs = Blog.query.order_by(Blog.pub_date.desc()).all()
+
+    if id:
+        blogs = [Blog.query.get(id)]
+
     return render_template('blogs.html', title="Build a Blog!", blogs=blogs, current_user=getUser(), isLoggedIn=isLoggedIn())
 
 @app.route('/', methods=['POST', 'GET'])

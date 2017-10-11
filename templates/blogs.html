@@ -1,21 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% if blog %}
-        <h2 class="post-title">{{ blog.title }}</h2>
-        <p class="post-body">{{ blog.body }}</p>
-        <p class="post-author">written by <a href="/blog?user={{ blog.owner.username }}">{{ blog.owner.username }}</a> on {{ blog.pub_date }}</p>
+    <h4><small>RECENT POSTS</small></h4>
+    
+    <hr>
+
+    {% if blogs|length == 0 %}
+        <p>No posts yet</p>
     {% else %}
-        <h1>blog posts!</h1>
-        
-        {% if blogs|length == 0 %}
-            <p>No posts yet</p>
-        {% else %}
-            {% for blog in blogs %}
-                <h2><a href="/blog?id={{ blog.id }}">{{ blog.title }}</a></h2>
-                <p>{{ blog.body }}</p>
-                <p class="post-author">written by <a href="/blog?user={{ blog.owner.username }}">{{ blog.owner.username }}</a> on {{ blog.pub_date }}</p>
-            {% endfor %}
-        {% endif %}
+        {% for blog in blogs %}
+            <h2 class="post-title"><a href="/blog?id={{ blog.id }}">{{ blog.title }}</a></h2>
+            <p class="post-author">Post by <a href="/blog?user={{ blog.owner.username }}">{{ blog.owner.username }}</a> on {{ blog.pub_date }}</p>
+            <br>
+            <p class="post-body">{{ blog.body }}</p>
+            <br>
+            <br>
+        {% endfor %}
     {% endif %}
 {% endblock %}

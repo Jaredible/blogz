@@ -6,19 +6,19 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
     </head>
 <body>
-    <nav>
+    <nav class="nav-pills">
         <ul id="user-account">
             {% if isLoggedIn %}
                 <li class="current_user">logged in as <a href="/blog?user={{ current_user }}"><strong>{{ current_user }}</strong></a></li>
-                <li><a href="/logout">logout</a></li>
+                <li><a href="/logout">Logout</a></li>
             {% else %}
-                <li><a href="/login">login</a></li>
+                <li><a href="/login">Login</a></li>
             {% endif %}
         </ul>
         <ul>
-            <li><a href="/">home</a></li>
-            <li><a href="/blog">all posts</a></li>
-            <li><a href="/blog/newpost">new post</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/blog">Blogs</a></li>
+            <li><a href="/blog/newpost">Create Post</a></li>
         </ul>
     </nav>
 
