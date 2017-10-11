@@ -79,7 +79,7 @@ def login():
         else:
             username_error = 'Please enter a username'
 
-    return render_template('login.html', username=username, username_error=username_error, password_error=password_error, isLoggedIn=isLoggedIn())
+    return render_template('login.html', title='Blogz', username=username, username_error=username_error, password_error=password_error, isLoggedIn=isLoggedIn())
 
 username_pattern = re.compile('^(?=\S{4,20}$)')
 
@@ -142,7 +142,7 @@ def signup():
             else:
                 username_error = 'Please enter a username'
 
-    return render_template('signup.html', username=username, username_error=username_error, password_error=password_error, verify_error=verify_error, current_user=getUser(), isLoggedIn=isLoggedIn())
+    return render_template('signup.html', title='Blogz', username=username, username_error=username_error, password_error=password_error, verify_error=verify_error, current_user=getUser(), isLoggedIn=isLoggedIn())
 
 @app.route('/logout')
 def logout():
@@ -161,7 +161,7 @@ def newpost():
         db.session.commit()
         return redirect('/blog')
 
-    return render_template('newpost.html', title="Build a Blog!", current_user=getUser(), isLoggedIn=isLoggedIn())
+    return render_template('newpost.html', title='Blogz', current_user=getUser(), isLoggedIn=isLoggedIn())
 
 @app.route('/blog', methods=['POST', 'GET'])
 def blogs():
@@ -170,11 +170,11 @@ def blogs():
 
     if id:
         blog = Blog.query.get(id)
-        return render_template('blogs.html', title="Build a Blog!", blog=blog, current_user=getUser(), isLoggedIn=isLoggedIn())
+        return render_template('blogs.html', title='Blogz', blog=blog, current_user=getUser(), isLoggedIn=isLoggedIn())
 
     if username:
         blogs = User.query.filter_by(username=username).first().blogs
-        return render_template('singleUser.html', title="Build a Blog!", blogs=blogs, username=username, postnew=request.method == 'POST', current_user=getUser(), isLoggedIn=isLoggedIn())
+        return render_template('singleUser.html', title='Blogz', blogs=blogs, username=username, postnew=request.method == 'POST', current_user=getUser(), isLoggedIn=isLoggedIn())
 
     blogs = Blog.query.order_by(Blog.pub_date.desc()).all()
     return render_template('blogs.html', title="Build a Blog!", blogs=blogs, current_user=getUser(), isLoggedIn=isLoggedIn())
@@ -182,7 +182,7 @@ def blogs():
 @app.route('/', methods=['POST', 'GET'])
 def index():
     users = User.query.all()
-    return render_template('index.html', users=users, current_user=getUser(), isLoggedIn=isLoggedIn())
+    return render_template('index.html', title='Blogz', users=users, current_user=getUser(), isLoggedIn=isLoggedIn())
 
 if __name__ == '__main__':
     app.run()
