@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ title }}</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/normalize.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    </head>
+<body>
+    <nav>
+        <ul id="user-account">
+            {% if isLoggedIn %}
+                <li class="current_user">logged in as <a href="/blog?user={{ current_user }}"><strong>{{ current_user }}</strong></a></li>
+                <li><a href="/logout">logout</a></li>
+            {% else %}
+                <li><a href="/login">login</a></li>
+            {% endif %}
+        </ul>
+        <ul>
+            <li><a href="/">home</a></li>
+            <li><a href="/blog">all posts</a></li>
+            <li><a href="/blog/newpost">new post</a></li>
+        </ul>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        <ul>
+            {% for category, message in messages %}
+                <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endwith %}
+
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
