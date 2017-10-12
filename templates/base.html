@@ -9,16 +9,16 @@
     <nav class="nav-pills">
         <ul id="user-account">
             {% if isLoggedIn %}
-                <li class="current_user">logged in as <a href="/blog?user={{ current_user }}"><strong>{{ current_user }}</strong></a></li>
-                <li><a href="/logout">Logout</a></li>
+                <li class="b">Logged in as <a href="/blog?user={{ current_user }}"><strong>{{ current_user }}</strong></a></li>
+                <li><a class="a" href="/logout">Logout</a></li>
             {% else %}
-                <li><a href="/login">Login</a></li>
+                <li><a class="a" href="/login">Login</a></li>
             {% endif %}
         </ul>
         <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/blog">Blogs</a></li>
-            <li><a href="/blog/newpost">Create Post</a></li>
+            <li><a class="a" href="/">Home</a></li>
+            <li><a class="a" href="/blog">Blogs</a></li>
+            <li><a class="a" href="/blog/newpost">Create Post</a></li>
         </ul>
     </nav>
 

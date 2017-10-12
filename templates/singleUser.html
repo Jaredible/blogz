@@ -1,18 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h4>{{ username }}'s blog</h4>
+    <h2>
+        <strong>
+            {% if username == session_user %}
+                Your 
+            {% else %}
+                {{ username }}'s 
+            {% endif %}
+            Blog Posts
+        </strong>
+    </h2>
+
+    <hr>
 
     {% if blogs|length == 0 %}
         <p>No posts yet</p>
     {% else %}
         {% for blog in blogs %}
-            <h2 class="post-title"><a href="/blog?id={{ blog.id }}">{{ blog.title }}</a></h2>
-            <p class="post-author">Post by <a href="/blog?user={{ blog.owner.username }}">{{ blog.owner.username }}</a> on {{ blog.pub_date }}</p>
-            <br>
-            <p class="post-body">{{ blog.body }}</p>
-            <br>
-            <br>
+            <div class="post-content" style="cursor: pointer;" onclick="window.location='/blog?id={{ blog.id }}';">
+                <h2 class="post-title">{{ blog.title }}</h2>
+                <p class="post-author">Post by <a href="/blog?user={{ blog.owner.username }}">{{ blog.owner.username }}</a> on {{ blog.pub_date }}</p>
+                <br>
+                <p class="post-body">{{ blog.body }}</p>
+            </div>
         {% endfor %}
     {% endif %}
 {% endblock %}

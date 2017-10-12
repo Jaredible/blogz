@@ -1,8 +1,23 @@
+* {
+    box-sizing: border-box;
+}
+/* TODO bug??, screen shifts right */
+
 body {
-    font-family: sans-serif;
+    font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+    font-size: 17px;
+    line-height: 1.42857143;
+    color: #333;
     width: 800px;
+    min-height:100vh;
     margin: 0 auto;
     padding: 10px;
+
+    background: red; /* For browsers that do not support gradients */
+    background: -webkit-linear-gradient(#d0d0e0, #8080e0); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#d0d0e0, #8080e0); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#d0d0e0, #8080e0); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#fff, #aaa); /* Standard syntax */
 }
 
 .error {
@@ -16,16 +31,30 @@ label {
 
 input[type=text],
 input[type=password] {
-    width: 400px;
+    -webkit-transition: width 0.4s ease-in-out;
+    width: 200px;
     font-size: 20px;
     padding: 2px;
+    border-radius: 4px;
+}
+
+input[type=text]:focus,
+input[type=password]:focus {
+    width: 300px;
 }
 
 textarea {
-    width: 400px;
-    height: 200px;
+    -webkit-transition: width 0.5s, height 0.5s;
+    width: 200px;
+    height: 100px;
     font-size: 17px;
     font-family: monospace;
+    border-radius: 4px;    
+}
+
+textarea:hover {
+    width: 300px;
+    height: 130px;
 }
 
 input[type=submit] {
@@ -36,7 +65,10 @@ hr {
     margin-top: 20px;
     margin-bottom: 20px;
     border: 0;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #555;
+    box-sizing: content-box;
+    display: block;
+    unicode-bidi: isolate;
 }
 
 .post + .post {
@@ -44,25 +76,44 @@ hr {
 }
 
 .post-title {
+    text-shadow: 0 0 1px blue;
+}
+
+.post-title a {
     text-decoration: none;
-    font-size: 30px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    font-weight: 500;
-    line-height: 1.1;
+}
+
+.b a {
+    text-decoration: none;
+}
+
+.post-author a {
+    text-decoration: none;
+}
+
+a:link {
+    color: #1010ac;
+}
+
+a:visited {
+    color: #6161e1;
+}
+
+a:hover {
+    color: #3131e1;
+}
+
+a:active {
+    color: #2121e1;
 }
 
 .post-body {
-    margin: 0;
     font-size: 17px;
 }
 
 .post-author {
-    text-decoration: none;
     font-style: italic;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.1;
+    text-decoration: none;    
 }
 
 nav ul {
@@ -86,31 +137,153 @@ nav #user-account {
     font-size: 12px;    
 }
 
+h2 {
+    font-size: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    line-height: 1.1;
+    display: block;
+}
+
 h4 {
     font-size: 18px;
     margin-top: 10px;
     margin-bottom: 10px;
     font-weight: 500;
     line-height: 1.1;
+    display: block;
 }
 
 h4 small {
-    font-size: 75%;
-    color: #777;
+    font-size: 100%;
+    font-weight: 400;
+    line-height: 1;
+    color: #444;
+}
+
+h5 {
+    font-size: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: 500;
+    line-height: 1.1;
 }
 
 p {
     margin: 0 0 10px;
+    display: block;
 }
 
-.nav-pills a {
+.nav-pills .a {
     color: #fff;
     background-color: #337ab7;
-    border-radius: 4px;
+    border-radius: 6px;
     position: relative;
-    display: block;
+    display: inline-block;
     padding: 10px 15px;
     text-decoration: none;
 }
 
-/* https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_blog&stacked=h
+.nav-pills .b {
+    font-style: italic;
+}
+
+.nav-users a {
+    color: #fff;
+    background-color: #337ab7;
+    border-radius: 6px;
+    position: relative;
+    display: inline-block;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+.post-content {
+    color: #111;
+    background-color: #ddd;
+    box-shadow: 1px 1px #bbb;    
+    border-radius: 10px;
+    position: relative;
+    display: block;
+    margin: 10px 10px 10px;
+    padding: 10px 10px;
+    text-decoration: none;
+}
+
+.post-content .post-title {
+    color: black;
+}
+
+.post-content:hover {
+    background-color: #eee;
+    box-shadow: 1px 1px #ccc;
+}
+
+.post-button {
+    display: inline-block;
+    border-radius: 4px;
+    background-color: #7171e1;
+    border: none;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px;
+    width: 100px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+.post-button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+  
+.post-button span:after {
+    content: '\00bb';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -20px;
+    transition: 0.5s;
+}
+  
+.post-button:hover span {
+    padding-right: 25px;
+}
+  
+.post-button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+.login-button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: #fff;
+    background-color: #8181e1;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 7px #5151e1;
+}
+  
+.login-button:hover {
+    background-color: #7171f1
+}
+  
+.login-button:active {
+    background-color: #6161e1;
+    box-shadow: 0 4px #3131e1;
+    transform: translateY(3px);
+}
+
+/* https://www.w3schools.com/bootstrap/tryit.asp?filename=trybs_temp_blog&stacked=h */
+/* add easter egg */

@@ -6,27 +6,24 @@
     <form action="/signup" method="POST">
         <table>
             <tr>
-                <td><label for="username">Username</label></td>
                 <td>
-                    <input name="username" type="text" value="{{ username }}">
+                    <input name="username" type="text" value="{{ username }}" placeholder="Username">
                     <span class="error">{{ username_error }}</span>
                 </td>
             </tr>
             <tr>
-                <td><label for="password">Password</label></td>
                 <td>
-                    <input name="password" type="password">
+                    <input name="password" type="password" placeholder="Password">
                     <span class="error">{{ password_error }}</span>
                 </td>
             </tr>
             <tr>
-                <td><label for="verify">Verify Password</label></td>
                 <td>
-                    <input name="verify" type="password">
+                    <input name="verify" type="password" placeholder="Verify Password">
                     <span class="error">{{ verify_error }}</span>
                 </td>
             </tr>
         </table>
-        <input type="submit">
+        <button class="login-button" type="submit">Signup</button>
     </form>
 {% endblock %}

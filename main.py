@@ -150,29 +150,45 @@ def logout():
         del session['username']
     return redirect('/blog')
 
+# TODO fix case sensitive logins in username
+
 @app.route('/blog/newpost', methods=['POST', 'GET'])
 def newpost():
+    post_title = ''
+    post_body = ''
+    post_error = ''
+
     if request.method == 'POST':
         owner = User.query.filter_by(username=session['username']).first()
-        blog_title = request.form['title']
-        blog_body = request.form['body']
-        new_blog = Blog(blog_title, blog_body, owner)
-        db.session.add(new_blog)
-        db.session.commit()
-        return redirect('/blog')
+        post_title = request.form['title']
+        post_body = request.form['body']
 
-    return render_template('newpost.html', title='Blogz', current_user=getUser(), isLoggedIn=isLoggedIn())
+        if post_title:
+            if post_body:
+                new_blog = Blog(post_title, post_body, owner)
+                db.session.add(new_blog)
+                db.session.commit()
+                return redirect('/blog')
+            else:
+                post_error = 'Please enter a body'
+        else:
+            post_error = 'Please enter a title'
 
+    return render_template('newpost.html', title='Blogz', post_title=post_title, post_body=post_body, post_error=post_error, current_user=getUser(), isLoggedIn=isLoggedIn())
+
+# TODO bug can add more than just one newpost if you click uncontrollably on post button
+# TODO do hacker tests
 @app.route('/blog', methods=['POST', 'GET'])
 def blogs():
     id = request.args.get('id')
     username = request.args.get('user')
 
-    if username:
-        blogs = User.query.filter_by(username=username).first().blogs
-        return render_template('singleUser.html', title='Blogz', blogs=blogs, username=username, postnew=request.method == 'POST', current_user=getUser(), isLoggedIn=isLoggedIn())
-
     blogs = Blog.query.order_by(Blog.pub_date.desc()).all()
+
+    if username:
+        # TODO sort!!!!!!!
+        blogs = User.query.filter_by(username=username).first().blogs
+        return render_template('singleUser.html', title='Blogz', blogs=blogs, session_user=getUser(), username=username, postnew=request.method == 'POST', current_user=getUser(), isLoggedIn=isLoggedIn())
 
     if id:
         blogs = [Blog.query.get(id)]
