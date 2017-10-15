@@ -176,8 +176,6 @@ def newpost():
 
     return render_template('newpost.html', title='Blogz', post_title=post_title, post_body=post_body, post_error=post_error, current_user=getUser(), isLoggedIn=isLoggedIn())
 
-# TODO bug can add more than just one newpost if you click uncontrollably on post button
-# TODO do hacker tests
 @app.route('/blog', methods=['POST', 'GET'])
 def blogs():
     id = request.args.get('id')

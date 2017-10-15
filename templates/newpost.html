@@ -4,15 +4,12 @@
     <h1>Create Post</h1>
     
     <form method="POST">
-        <label>
-            <input type="text" name="title" value="{{ post_title }}" placeholder="Title">
-        </label>
+        <input type="text" name="title" value="{{ post_title }}" placeholder="Title">
         <br>
-        <label>
-            <textarea name="body">{{ post_body }}</textarea>
-        </label>
-        
-        <button class="post-button" type="submit"><span>Post </span></button>
+        <br>
+        <textarea name="body">{{ post_body }}</textarea>
+        <br>
+        <input class="login-button" name="post" type="submit" value="Post">
         <span class="error">{{ post_error }}</span>        
     </form>
 {% endblock %}
